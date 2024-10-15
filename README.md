@@ -163,7 +163,7 @@ graph TD
 ```java
 import java.io.PrintStream;
 import java.util.Scanner;
-public class lab {
+public class Main {
     // Объявляем объект класса Scanner для ввода данных
     public static Scanner in = new Scanner(System.in);
     // Объявляем объект класса PrintStream для вывода данных
