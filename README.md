@@ -117,7 +117,7 @@ graph TD
     U -- Да --> V[/Вывести: z /]
     U -- Нет --> W[/Вывести: x /]
     C -- Нет --> Y{w < y}
-    Y -- Да --> Z{z < x}
+    Y -- Да --> Z{z < w}
     Z -- Да --> a[/Вывести: w /]
     Z -- Нет --> b{z < y}
     b -- Да --> c[/Вывести: z /]
@@ -187,67 +187,102 @@ public class Main {
             z = in.nextInt();
         }
         // Рассмотрим первый случай, когда x<y
-        if (x<y)
-            // Далее сравниваем все остальные числа друг с другом
-            if (y<w)
-                if (w<z)
+        if (x<y) 
+            // Далее проверяем остальные условия, варианты которые сейчас могут быть: xywz,xyzw,xwzy,xwyz,xzyw,xzwy,zxyw,zxwy,zwxy,wzxy,wxyz,wxzy. (Далее в комментариях будут написаны возможные варианты расстановок)
+            if (y < w)
+                // xywz,xyzw,zxyw,xzyw
+                if (w < z)
+                    // xYwz
                     out.print(y);
                 else
-                if (y<z)
-                    out.print(y);
-                else
-                if (x<z)
-                    out.print(z);
-                else
-                    out.print(x);
+                    // xyzw,xzyw,zxyw
+                    if (y < z)
+                        // xYzw
+                        out.print(y);
+                    else
+                        // xzyw,zxyw
+                        if (x < z)
+                            // xZyw
+                            out.print(z);
+                        else
+                            // zXyw
+                            out.print(x);
             else
-            if (x<w)
-                if (z<x)
-                    out.print(x);
+                // xwyz,xwzy,zxwy,wxzy,wzxy,zwxy,xzwy
+                if (x<w)
+                // xwyz,xwzy,xzwy,zxwy
+                    if (z<x)
+                        // zXwy
+                        out.print(x);
+                    else
+                        //xwyz,xwzy,xzwy
+                        if (z<w)
+                            // xZwy
+                            out.print(z);
+                        else
+                            // xWyz,xWzy
+                            out.print(w);
                 else
-                if (z<w)
-                    out.print(z);
-                else
-                    out.print(w);
-            else
-            if (z<w)
-                out.print(w);
-            else
-            if (z<x)
-                out.print(z);
-            else
-                out.print(x);
-            // Второй случай: x>y
+                    // wxyz,wxzy,wzxy,zwxy
+                    if (z<w)
+                        // zWxy
+                        out.print(w);
+                    else
+                        if (z<x)
+                            // wZxy
+                            out.print(z);
+                        else
+                            // wXyz, wXzy
+                            out.print(x);
+        // Второй случай: x>y
         else
-            // Также проверяем остальные условия
+            // Также проверяем остальные условия: yxwz,yxzw,ywxz,ywzx,yzxw,yzwx,zywx,zyxw,zwyx,wzyx,wyxz,wyzx
             if (w<y)
+                // wzyx,zwyx,xyzx,wyxz
                 if (z<w)
+                    // zWyx
                     out.print(w);
                 else
-                if (z<y)
-                    out.print(z);
-                else
-                    out.print(y);
+                    // wzyx,wyzx,wyxz
+                    if (z<y)
+                        // wZyx
+                        out.print(z);
+                    else
+                        // wYzx,wYxz
+                        out.print(y);
             else
-            if (w<x)
-                if (x<z)
-                    out.print(w);
-                else
-                if (w<z)
-                    out.print(w);
-                else
-                if (z<y)
-                    out.print(y);
-                else
-                    out.print(z);
-            else
-            if (z<y)
-                out.print(y);
-            else
-            if (z<x)
-                out.print(z);
-            else
-                out.print(x);
+                // yxwz,yxzw,yzxw,zyxw,ywxz,ywzx,yzwx,zywx
+                    if (w<x)
+                        // ywxz,ywzx,yzwx,zywx
+                        if (x<z)
+                            // yWxz
+                            out.print(w);
+                        else 
+                            // ywzx,yzwx,zywx
+                            if (w<z)
+                                // yWzx
+                            out.print(w);
+                            else
+                                // ywzx,yzwx,zywx
+                                if (z<y)
+                                    // zYwx
+                                    out.print(y);
+                                else
+                                    // yZwx
+                                    out.print(z);
+                    else
+                        // yxwz,yxzw,yzxw,zyxw
+                        if (z<y)
+                            // zYxw
+                            out.print(y);
+                        else
+                            // yxwz,yxzw,yzxw
+                            if (z<x)
+                                // yZxw
+                                out.print(z);
+                            else
+                                // yXwz,yXzw
+                                out.print(x); 
 
     }
 }
